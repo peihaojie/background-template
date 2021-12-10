@@ -4,11 +4,7 @@
 > - 包含 pageWrap filters btnWrap pagination dialogs 五个组件
 > - 其中 pageWrap 用于样式布局，其他组件以插槽的形式使用（也可单独使用）
 
-[toc]
-
 ## 安装
-
----
 
 使用 npm:
 
@@ -23,8 +19,6 @@ yarn add background-template
 ```
 
 ## 引入
-
----
 
 在 main.js 中加入以下内容：
 
@@ -48,8 +42,6 @@ Vue.use(backgroundTemplate);
 ```
 
 ## 使用
-
----
 
 ### pageWrap 用于样式布局
 
@@ -244,8 +236,6 @@ props: {
 > - 这里对 el-dialog 也进行了兼容 [Element-UI dialog 的默认事件](https://element.eleme.cn/#/zh-CN/component/dialog)
 
 ## 目录结构
-
----
 
 ```markdown
 |-- src
