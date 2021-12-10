@@ -1,14 +1,12 @@
 <!--
  * @Date         : 2021-12-10 08:45:32
  * @LastEditors  : HaoJie
- * @LastEditTime : 2021-12-10 09:54:51
+ * @LastEditTime : 2021-12-10 15:44:55
  * @FilePath     : \src\App.vue
 -->
 <template>
-  <div id="app" class="pr">
-    <div class="top--wrap">
-      这里是标题栏_标题_标题_标题_标题_标题_标题_标题_标题_标题_标题_标题_标题_标题
-    </div>
+  <div id="app" class="">
+    <div class="top--wrap">标题栏</div>
     <el-menu
       default-active="2"
       class="el-menu-vertical-demo"
@@ -48,14 +46,14 @@
       </el-menu-item>
     </el-menu>
 
-    <div class="content--wrap bb pr">
+    <div class="content--wrap bb">
       <router-view />
     </div>
   </div>
 </template>
 
 <style lang="stylus">
-html, body {
+html, body, #app {
   height: 100% !important;
 }
 #app {
@@ -64,7 +62,6 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height 100%
 }
 
 .top--wrap

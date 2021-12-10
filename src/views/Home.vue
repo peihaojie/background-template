@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2021-12-10 08:45:32
  * @LastEditors  : HaoJie
- * @LastEditTime : 2021-12-10 14:27:24
+ * @LastEditTime : 2021-12-10 16:10:23
  * @FilePath     : \src\views\Home.vue
 -->
 <template>
@@ -9,6 +9,7 @@
     <template v-slot:filters>
       <filters
         ref="filters"
+        download
         :searchList="searchList"
         @search="search"
       ></filters>
@@ -84,9 +85,9 @@ export default {
     return {
       searchList: [
         {
-          label: "寻源物料组",
+          label: "下拉筛选",
           key: "fls",
-          placeholder: "请选择寻源物料组",
+          placeholder: "请下拉选择数据",
           type: "select",
           options: [
             {
@@ -98,6 +99,18 @@ export default {
               value: "确实",
             },
           ],
+        },
+        {
+          label: "日期",
+          key: "date",
+          placeholder: "请选择日期",
+          type: "date",
+        },
+        {
+          label: "输入框",
+          key: "input",
+          placeholder: "请输入数据",
+          type: "input",
         },
         {
           label: "时间",

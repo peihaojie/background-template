@@ -1,7 +1,7 @@
 /*
  * @Date         : 2021-12-10 08:45:32
  * @LastEditors  : HaoJie
- * @LastEditTime : 2021-12-10 14:54:25
+ * @LastEditTime : 2021-12-10 16:12:09
  * @FilePath     : \src\main.js
  */
 import Vue from "vue";
@@ -18,7 +18,7 @@ Vue.config.productionTip = false;
 components.forEach((component) => {
   Vue.component(component.name, component);
 });
-Vue.use(ElementUI);
+Vue.use(ElementUI, { size: "small" });
 
 new Vue({
   router,
