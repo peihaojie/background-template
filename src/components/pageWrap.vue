@@ -1,8 +1,8 @@
 <!--
  * @Date         : 2021-11-24 11:40:40
- * @LastEditors  : HaoJie
- * @LastEditTime : 2021-12-10 14:51:25
- * @FilePath     : \src\components\pageWrap.vue
+ * @LastEditors: HaoJie
+ * @LastEditTime: 2021-12-21 15:57:45
+ * @FilePath: \background-template\src\components\pageWrap.vue
 -->
 <template>
   <div class="page--wrap flex col bb">
@@ -27,21 +27,17 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-.page--wrap {
-  height: 100%;
-  padding: 12px 24px 0;
-  .table--wrap {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    .table {
-      height: calc(100% - 40px);
-    }
-    .pageSize--wrap {
-      height: 40px;
-      justify-content: flex-end;
-    }
-  }
-}
+.page--wrap
+  height 100%
+  padding 12px 24px 0
+  .table--wrap
+    top 0
+    right 0
+    bottom 0
+    left 0
+    .table
+      height calc(100% - 40px)
+    .pageSize--wrap
+      height 40px
+      justify-content flex-end
 </style>

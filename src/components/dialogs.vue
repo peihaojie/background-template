@@ -1,8 +1,8 @@
 <!--
  * @Date         : 2021-11-25 09:10:32
- * @LastEditors  : HaoJie
- * @LastEditTime : 2021-12-10 14:47:54
- * @FilePath     : \src\components\dialogs.vue
+ * @LastEditors: HaoJie
+ * @LastEditTime: 2021-12-21 15:57:19
+ * @FilePath: \background-template\src\components\dialogs.vue
 -->
 <template>
   <div id="dialog-wrap">
@@ -169,44 +169,37 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-#dialog-wrap {
-  ::v-deep .dialog {
-    border-radius: 15px;
-    position: absolute;
-    top: 15vh;
-    left: 50%;
-    transform: translateX(-50%);
-    .el-dialog__header {
-      border-bottom: 1px solid #c0c4cc;
-      cursor: move;
-      span {
-        user-select: none;
-      }
-    }
-    .dialog-header {
-      line-height: 24px;
-      font-size: 18px;
-      color: #303133;
-      padding-right: 20px;
-      .dialog-full {
-        position: absolute;
-        top: 20px;
-        right: 60px;
-        padding: 0;
-        background: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        font-size: 16px;
-        &:hover {
-          color: #1890ff;
-        }
-      }
-    }
-    .el-dialog__body {
-      min-height: 300px;
-      max-height: 800px;
-    }
-  }
-}
+#dialog-wrap
+  ::v-deep .dialog
+    border-radius 15px
+    position absolute
+    top 15vh
+    left 50%
+    transform translateX(-50%)
+    .el-dialog__header
+      border-bottom 1px solid #c0c4cc
+      cursor move
+      span
+        user-select none
+    .dialog-header
+      line-height 24px
+      font-size 18px
+      color #303133
+      padding-right 20px
+      .dialog-full
+        position absolute
+        top 20px
+        right 60px
+        padding 0
+        background transparent
+        border none
+        outline none
+        cursor pointer
+        font-size 16px
+        &:hover
+          color #1890ff
+    .el-dialog__body
+      min-height 300px
+      max-height 800px
+      overflow auto
 </style>

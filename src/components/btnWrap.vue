@@ -1,8 +1,8 @@
 <!--
  * @Date         : 2021-11-24 13:55:30
- * @LastEditors  : HaoJie
- * @LastEditTime : 2021-12-10 14:47:51
- * @FilePath     : \src\components\btnWrap.vue
+ * @LastEditors: HaoJie
+ * @LastEditTime: 2021-12-21 15:57:33
+ * @FilePath: \background-template\src\components\btnWrap.vue
 -->
 <template>
   <div class="btn--wrap tl" v-if="btnList.length">
@@ -101,7 +101,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.btn--wrap {
-  padding: 5px 0 15px 0;
-}
+.btn--wrap
+  padding 5px 0 15px 0
 </style>

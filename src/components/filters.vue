@@ -223,7 +223,7 @@ export default {
       const query = JSON.parse(JSON.stringify(this.searchConfig));
       for (const key in query) {
         const val = query[key];
-        !val && delete query[key];
+        !val && val !== 0 && delete query[key];
         const { type, valueType } = this.searchList.find((a) => a.key === key);
         if (valueType === "array") {
           switch (type) {
@@ -256,31 +256,23 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.searchList--wrap {
-  .searchList {
-    padding-right: 24px;
-    flex-wrap: wrap;
-    .search--item {
-      width: 300px;
-      padding: 10px 12px 10px 0;
-      .search--item__label {
-        white-space: nowrap;
-        padding-right: 5px;
-      }
-      .el-select {
-        width: 100%;
-      }
-    }
-    .search--item__date {
-      width: 400px !important;
-      .el-input__inner {
-        width: 100%;
-      }
-    }
-  }
-  .btn--wrap {
-    flex-wrap: nowrap;
-    height: 52px;
-  }
-}
+.searchList--wrap
+  .searchList
+    padding-right 24px
+    flex-wrap wrap
+    .search--item
+      width 300px
+      padding 10px 12px 10px 0
+      .search--item__label
+        white-space nowrap
+        padding-right 5px
+      .el-select
+        width 100%
+    .search--item__date
+      width 400px !important
+      .el-input__inner
+        width 100%
+  .btn--wrap
+    flex-wrap nowrap
+    height 52px
 </style>
