@@ -1,18 +1,13 @@
 <!--
  * @Date         : 2021-12-10 08:45:32
- * @LastEditors  : HaoJie
- * @LastEditTime : 2021-12-10 16:10:23
- * @FilePath     : \src\views\Home.vue
+ * @LastEditors: HaoJie
+ * @LastEditTime: 2022-12-07 13:50:09
+ * @FilePath: \background-template\src\views\Home.vue
 -->
 <template>
   <pageWrap>
     <template v-slot:filters>
-      <filters
-        ref="filters"
-        download
-        :searchList="searchList"
-        @search="search"
-      ></filters>
+      <filters ref="filters" download reset showFold @search="search"></filters>
     </template>
 
     <template v-slot:btn>
@@ -78,50 +73,57 @@
 // @ is an alias to /src
 import moment from "moment";
 
+const tempList = [
+  {
+    label: "下拉筛选",
+    key: "fls",
+    placeholder: "请下拉选择数据",
+    type: "select",
+    options: [
+      {
+        label: "牛哇",
+        value: "牛哇",
+      },
+      {
+        label: "确实",
+        value: "确实",
+      },
+    ],
+  },
+  {
+    label: "日期",
+    key: "date",
+    placeholder: "请选择日期",
+    type: "date",
+  },
+  {
+    label: "日期2",
+    key: "date2",
+    placeholder: "请选择日期",
+    type: "date",
+  },
+  {
+    label: "输入框",
+    key: "input",
+    placeholder: "请输入数据",
+    type: "input",
+  },
+  {
+    label: "时间",
+    key: "time",
+    placeholder: "请选择月份",
+    type: "month",
+    clearable: false,
+    valueType: "array",
+    defaultValue: moment().startOf("month").format("YYYY-MM-DD HH:mm:ss"),
+  },
+];
+
 export default {
   name: "Home",
 
   data() {
     return {
-      searchList: [
-        {
-          label: "下拉筛选",
-          key: "fls",
-          placeholder: "请下拉选择数据",
-          type: "select",
-          options: [
-            {
-              label: "牛哇",
-              value: "牛哇",
-            },
-            {
-              label: "确实",
-              value: "确实",
-            },
-          ],
-        },
-        {
-          label: "日期",
-          key: "date",
-          placeholder: "请选择日期",
-          type: "date",
-        },
-        {
-          label: "输入框",
-          key: "input",
-          placeholder: "请输入数据",
-          type: "input",
-        },
-        {
-          label: "时间",
-          key: "time",
-          placeholder: "请选择月份",
-          type: "month",
-          clearable: false,
-          valueType: "array",
-          defaultValue: moment().startOf("month").format("YYYY-MM-DD HH:mm:ss"),
-        },
-      ],
       searchConfig: {},
       tableData: [],
       total: 0,
@@ -129,10 +131,11 @@ export default {
     };
   },
   mounted() {
-    this.$refs.filters.emit("search");
+    this.$refs.filters.initSearchList(tempList);
   },
   methods: {
     search(query) {
+      console.log("query", query);
       this.searchConfig = query;
       this.$refs.pagination.resetPage();
     },

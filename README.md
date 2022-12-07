@@ -43,11 +43,11 @@ Vue.use(backgroundTemplate);
 
 ## 使用
 
-### pageWrap 用于样式布局
+### PageWrap 用于样式布局
 
 ![pageWrap](./images/homePage.png)
 
-#### pageWrap Slot
+#### PageWrap Slot
 
 | name    | 说明                           |
 | ------- | ------------------------------ |
@@ -61,7 +61,7 @@ Vue.use(backgroundTemplate);
 ```html
 <pageWrap>
   <template v-slot:filters>
-    <filters :searchList="[]"></filters>
+    <filters ref="filters"></filters>
   </template>
 
   <template v-slot:btn>
@@ -69,15 +69,10 @@ Vue.use(backgroundTemplate);
   </template>
 
   <template>
-    <el-table
-      :data="[]"
-      stripe
-      height="100%"
-      style="width: 100%"
-      border
-    >
+    <el-table :data="[]" stripe height="100%" style="width: 100%" border>
       <el-table-column prop="a" label="header" align="center">
       </el-table-column>
+    </el-table>
   </template>
 
   <template v-slot:page>
@@ -88,150 +83,114 @@ Vue.use(backgroundTemplate);
 </pageWrap>
 ```
 
-### filters 筛选器组件
+### Filters 筛选器组件
 
 ![pageWrap](./images/filters.png)
 
-#### filters Attributes
+> 通过 ref 使用 initSearchList 进行初始化；
+> 通过 sendSearchOnload 来配置是否在加载完成之后触发 search 事件；
 
-```js
-props: {
-    /**
-     * 搜索列表
-     *
-     * type = input
-     * label、key、placeholder
-     * defaultValue (默认：undefined) 默认展示的数据
-     *
-     * type = select
-     * label、key、placeholder、options
-     * options = [{ label: '', value: '' }]
-     * clear 触发change需要清除的数据 string[]
-     *
-     * type = date
-     * label
-     * startPlaceholder、endPlaceholder (默认：开始时间 - 结束时间)
-     * clearable (默认：true)
-     * valueType (默认：undefined) 为array时，value为数组
-     *
-     */
-    searchList: {
-      type: Array,
-      default: () => [],
-      required: true,
-    },
-    /**
-     * 导出列表
-     */
-    download: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * 导出的loading
-     */
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-  }
-```
+#### Filters Attributes
 
-#### filters Events
+| 参数             | 说明                                      | 可选值 |  类型   | 默认值 |
+| ---------------- | ----------------------------------------- | :----: | :-----: | :----: |
+| sendSearchOnload | 是否在初始化完成后触发第一个请求          |   -    | Boolean |  true  |
+| download         | 导出按钮                                  |   -    | Boolean | false  |
+| loading          | 导出按钮的 loading 状态，使用 refs 来修改 |   -    | Boolean | false  |
+| showFold         | 是否展示折叠按钮                          |   -    | Boolean | false  |
+| filterNum        | 单行展示几个筛选条件                      |   -    | Number  |   4    |
 
-| 方法名   | 说明               | 参数           |
+#### Filters Events
+
+| 事件名称 | 说明               | 回调参数       |
 | -------- | ------------------ | -------------- |
 | search   | 点击搜索或回车触发 | searchList.key |
 | download | 点击导出触发       | searchList.key |
 
-#### filters Methods
+#### Filters Methods
 
-| 事件名 | 说明           | 参数              |
-| ------ | -------------- | ----------------- |
-| emit   | 触发搜索或导出 | search / download |
+| 方法名         | 说明                      | 参数              |
+| -------------- | ------------------------- | ----------------- |
+| initSearchList | 初始化 Filters 的过滤条件 | [Search]          |
+| emit           | 触发搜索或导出            | search / download |
 
-### btnWrap 按纽栏组件
+#### Search Attributes
+
+| 参数             | 说明                                                    |                                              可选值                                               |          类型          |                                       默认值                                        |
+| ---------------- | ------------------------------------------------------- | :-----------------------------------------------------------------------------------------------: | :--------------------: | :---------------------------------------------------------------------------------: |
+| type             | 类型                                                    |                                 input、select、date、month、year                                  |         String         |                                        input                                        |
+| label            | 名称                                                    |                                                 -                                                 |         String         |                                          -                                          |
+| key              | 名称对应的 key                                          |                                                 -                                                 |         String         |                                          -                                          |
+| defaultValue     | 默认填充数据（重置的时候恢复的数据）                    |                                                 -                                                 |  不同 type 的类型不同  |                                          -                                          |
+| clearable        | 是否展示清空按钮                                        |                                                 -                                                 |        Boolean         |                                        true                                         |
+| placeholder      | type 为 input、select 时有效，对应 input placeholder    |                                                 -                                                 |         String         |                                          -                                          |
+| clear            | 触发 clear 事件需要清除的 keyList                       |                                                 -                                                 |        [String]        |                                          -                                          |
+| options          | type 为 select 时有效                                   |                                                 -                                                 | [{label:"", value:""}] |                                          -                                          |
+| startPlaceholder | type 为 date 时有效                                     |                                                 -                                                 |         String         |                                      开始时间                                       |
+| endPlaceholder   | type 为 date 时有效                                     |                                                 -                                                 |         String         |                                      结束时间                                       |
+| valueType        | date 的数据类型                                         |                                               array                                               |         String         |                                          -                                          |
+| pickerOptions    | type 为 date、month、year 时有效，禁用时间/增加快捷按钮 | [Element-UI pickerOptions](https://element.eleme.cn/#/zh-CN/component/date-picker#picker-options) |           -            | 默认禁用当前时间之后的全部，type 为 date 时的快捷键为最近一周、一个月、三个月、全部 |
+
+### BtnWrap 按纽栏组件
 
 ![pageWrap](./images/btnWrap.png)
 
-#### btnWrap Attributes
+> 该组件设计的初衷是为了在不同页面展示相同的 button
+> 相同的 顺序、文案、icon、type 等
 
-```js
-props: {
-    /**
-     * 按钮列表 id 唯一标识
-     * downloadTemplate 下载模板(点击之后会 loading，请使用 changeLoading 停止)
-     * upload 导入
-     * add 新增
-     * edit 编辑
-     */
-    eventsList: {
-      type: Array, // []string
-      default: () => [],
-    },
-  }
-```
+#### BtnWrap Attributes
 
-#### btnWrap Events
+| 参数       | 说明       | 可选值                                                                     |  类型  | 默认值 |
+| ---------- | ---------- | -------------------------------------------------------------------------- | :----: | :----: |
+| eventsList | 展示的按钮 | downloadTemplate(下载模板)、upload(导入)、add(新增)、edit(编辑)、del(删除) | String |   -    |
 
-| 方法名           | 说明     |
-| ---------------- | -------- |
-| downloadTemplate | 下载模板 |
-| upload           | 导入     |
-| add              | 新增     |
-| edit             | 编辑     |
+#### BtnWrap Events
 
-#### btnWrap Methods
+| 事件名称         | 说明     | 回调参数 |
+| ---------------- | -------- | -------- |
+| downloadTemplate | 下载模板 | -        |
+| upload           | 导入     | -        |
+| add              | 新增     | -        |
+| edit             | 编辑     | -        |
+| del              | 删除     | -        |
 
-| 事件名        | 说明               | 参数        | 默认值          |
+#### BtnWrap Methods
+
+| 方法名        | 说明               | 参数        | 默认参数        |
 | ------------- | ------------------ | ----------- | --------------- |
 | changeLoading | 修改按钮的 loading | id, loading | loading = false |
 
-### pagination 翻页器
+### Pagination 翻页器
 
 ![pageWrap](./images/page.png)
 
 > - pageSizes: [15, 30, 60]
 
-#### pagination Events
+#### Pagination Events
 
-| 方法名 | 说明               | 参数                            |
-| ------ | ------------------ | ------------------------------- |
-| change | 翻页/修改 pageSize | { pageSize: 1, currentPage: 1 } |
+| 事件名称 | 说明               | 回调参数                        |
+| -------- | ------------------ | ------------------------------- |
+| change   | 翻页/修改 pageSize | { pageSize: 1, currentPage: 1 } |
 
-#### pagination Methods
+#### Pagination Methods
 
-| 方法名    | 说明                   |
-| --------- | ---------------------- |
-| resetPage | 重置页码(pageSize = 1) |
+| 方法名    | 说明                   | 参数 |
+| --------- | ---------------------- | ---- |
+| resetPage | 重置页码(pageSize = 1) | -    |
 
 > - 这里对 el-pagination 也进行了兼容 [Element-UI pagination 的默认事件](https://element.eleme.cn/#/zh-CN/component/pagination)
 
-### dialogs 弹窗
+### Dialogs 弹窗
 
 ![pageWrap](./images/dialog.png)
 
-#### dialogs Attributes
+#### Dialogs Attributes
 
-```js
-props: {
-    /**
-     * width height(maxHeight)
-     */
-    dialogConfig: {
-      type: Object,
-      default: () => ({}),
-    },
-    title: {
-      type: String,
-      default: "",
-    },
-    fullScreen: { // 是否展示全屏按钮
-      type: Boolean,
-      default: false,
-    },
-  }
-```
+| 参数         | 说明                 | 可选值 |                类型                | 默认值 |
+| ------------ | -------------------- | ------ | :--------------------------------: | :----: |
+| title        | 弹窗的名称           | -      |               String               |   -    |
+| fullScreen   | 是否展示全屏按钮     | -      |              Boolean               | false  |
+| dialogConfig | 对窗口的大小进行设置 | -      | {width: "", height(maxHeight): ""} |   -    |
 
 > - 这里对 el-dialog 也进行了兼容 [Element-UI dialog 的默认事件](https://element.eleme.cn/#/zh-CN/component/dialog)
 
