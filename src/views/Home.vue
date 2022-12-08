@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2021-12-10 08:45:32
  * @LastEditors: HaoJie
- * @LastEditTime: 2022-12-07 13:50:09
+ * @LastEditTime: 2022-12-08 14:28:29
  * @FilePath: \background-template\src\views\Home.vue
 -->
 <template>
@@ -33,29 +33,7 @@
             <span>{{ getIndex(scope.$index + 1) }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="flmc" label="分类" align="center">
-        </el-table-column>
-        <el-table-column prop="name" label="基地" align="center">
-        </el-table-column>
-        <el-table-column label="本月批次合格率数据" align="center">
-          <el-table-column prop="rkpc" label="入库批次" align="center">
-          </el-table-column>
-          <el-table-column prop="hgpc" label="合格批次" align="center">
-          </el-table-column>
-          <el-table-column prop="bhgpc" label="不合格批次" align="center">
-          </el-table-column>
-          <el-table-column prop="djpc" label="冻结批次" align="center">
-          </el-table-column>
-          <el-table-column prop="pchgl" label="批次合格率" align="center">
-          </el-table-column>
-        </el-table-column>
-        <el-table-column prop="sypchgl" label="上月批次合格率" align="center">
-        </el-table-column>
-        <el-table-column
-          prop="tqpchgl"
-          label="去年同期批次合格率"
-          align="center"
-        >
+        <el-table-column prop="classify" label="分类" align="center">
         </el-table-column>
       </el-table>
     </template>
@@ -65,7 +43,18 @@
       </pagination>
     </template>
 
-    <dialogs :visible="false" title="牛哇" fullScreen></dialogs>
+    <dialogs
+      :visible="visible"
+      title="弹窗名称"
+      fullScreen
+      :dialogConfig="{ width: '600px' }"
+    >
+      <div class="dialog--body">弹窗的内容</div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="visible = false">取 消</el-button>
+        <el-button type="primary" @click="visible = false">确 认</el-button>
+      </div>
+    </dialogs>
   </pageWrap>
 </template>
 
@@ -128,6 +117,7 @@ export default {
       tableData: [],
       total: 0,
       tableLoading: false,
+      visible: true,
     };
   },
   mounted() {
@@ -158,7 +148,9 @@ export default {
       return params;
     },
     handlePage() {
-      // this.tableLoading = true;
+      const { pageSize, currentPage } = this.$refs.pagination.pageConfig;
+      console.log({ pageSize, currentPage });
+      // 发送请求
     },
     getIndex(num) {
       const { pageSize, currentPage } = this.$refs.pagination.pageConfig;

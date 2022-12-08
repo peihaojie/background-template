@@ -33,6 +33,9 @@
         </div>
       </template>
       <slot></slot>
+      <div slot="footer" class="dialog-footer">
+        <slot name="footer"></slot>
+      </div>
     </el-dialog>
   </div>
 </template>

@@ -1,6 +1,6 @@
 {
   "name": "background-template",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "private": false,
   "description": "统一的后台模板",
   "main": "./lib/background-template.common.js",
